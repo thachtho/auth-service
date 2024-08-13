@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UserService } from '@domain/services/user.service';
-import DatabaseModule from '@infrastructure/database/database.module';
-import { UserController } from '@application/controllers/user.controller';
+import DatabaseModule from 'src/app/infrastructure/common/database/database.module';
+import { KafkaConsumerModule } from './controllers/message/kafka-consumer.module';
 
 @Module({
   imports: [
@@ -20,8 +19,9 @@ import { UserController } from '@application/controllers/user.controller';
         database: configService.get('DB_DATABASE'),
       }),
     }),
+    KafkaConsumerModule,
   ],
-  controllers: [UserController],
-  providers: [UserService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

@@ -1,3 +1,4 @@
-import { App } from '@infrastructure/common/lifecycle/app';
+import { App } from 'src/app/lifecycle/app';
+import { AppModule } from './app/app.module';
 
-App.bootstrap();
+App.bootstrap(AppModule);
