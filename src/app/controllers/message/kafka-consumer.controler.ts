@@ -1,5 +1,6 @@
 import { Controller } from '@nestjs/common';
-import { EventPattern, Payload } from '@nestjs/microservices';
+import { MessagePattern, Payload } from '@nestjs/microservices';
+import { Observable } from 'rxjs';
 import { IKafkaParams, KafkaEvent, KafkaMessage } from './kafka.controler.i';
 import { Login } from './login/login';
 import { ILogin } from './login/login.i';
@@ -8,18 +9,17 @@ import { ILogin } from './login/login.i';
 export class KafkaConsumerController {
   constructor(private readonly login: Login) {}
 
-  @EventPattern(KafkaMessage)
-  message(@Payload() message: IKafkaParams) {
+  @MessagePattern(KafkaMessage)
+  message(@Payload() message: IKafkaParams): Observable<any> {
     return this.handle(message);
   }
 
-  handle(message: IKafkaParams) {
+  handle(message: IKafkaParams): Observable<any> {
     const { data, eventName } = message;
 
     switch (eventName) {
       case KafkaEvent.AUTH_LOGIN:
-        this.login.handle(data as ILogin);
-        break;
+        return this.login.handle(data as ILogin);
 
       default:
         break;

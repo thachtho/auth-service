@@ -1,4 +1,4 @@
-import { LoginUseCase } from '@application/login/login-usecase';
+import { LoginUseCase } from '@application/login/login.usecase';
 import { Injectable } from '@nestjs/common';
 import { ILogin } from './login.i';
 
@@ -8,8 +8,6 @@ export class Login {
 
   handle(data: ILogin) {
     this.validate();
-    //usecase toi application
-
     return this.loginUseCase.excute(data);
   }
 
