@@ -9,8 +9,8 @@ export enum Expires {
 }
 
 export enum LoginMessage {
-  PASS_WORD_INCORRECT = 'Mật khẩu không đúng',
-  ACCOUT_INCORRECT = 'Tên tài khoản không đúng',
+  PASS_WORD_INCORRECT = 'Mật khẩu không đúng.',
+  ACCOUT_INCORRECT = 'Tài khoản không hợp lệ.',
 }
 
 export interface IUser {
