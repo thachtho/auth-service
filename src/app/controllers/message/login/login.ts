@@ -1,9 +1,10 @@
 import { LoginUseCase } from '@application/login/login.usecase';
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
 import { catchError } from 'rxjs';
 import { ILogin } from './login.i';
 import { validator } from '@common/validator';
+import { ErrorCustom } from '@common/index';
 
 @Injectable()
 export class Login {
@@ -12,20 +13,16 @@ export class Login {
   handle(data: ILogin) {
     const valid = this.isValidate(data);
 
-    if (!valid) {
-      return;
+    if (!valid.status) {
+      throw new RpcException({
+        statusCode: HttpStatus.BAD_REQUEST,
+        message: valid.errorsMessage,
+      });
     }
 
     return this.loginUseCase.excute(data).pipe(
       catchError((error) => {
-        if (error?.status) {
-          throw new RpcException({
-            statusCode: error.status,
-            message: error.response,
-          });
-        }
-
-        throw new RpcException(error.response.data);
+        return ErrorCustom.handleError(error);
       }),
     );
   }
@@ -34,7 +31,13 @@ export class Login {
     const schema = {
       type: 'object',
       properties: {
-        email: { type: 'string' },
+        email: {
+          type: 'string',
+          pattern: '^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$',
+          errorMessage: {
+            pattern: 'Email không đúng định dạng!.',
+          },
+        },
         password: { type: 'string' },
       },
       required: ['email', 'password'],

@@ -28,6 +28,8 @@
     "@nestjs/microservices": "^10.3.10",
     "@nestjs/platform-express": "^10.0.0",
     "ajv": "^8.17.1",
+    "ajv-errors": "^3.0.0",
+    "ajv-formats": "^3.0.1",
     "axios": "^1.7.3",
     "kafkajs": "^2.2.4",
     "pg": "^8.12.0",
