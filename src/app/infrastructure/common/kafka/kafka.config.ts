@@ -1,5 +1,4 @@
 import { Transport } from '@nestjs/microservices';
-import { Kafka, Producer, Consumer, EachMessagePayload } from 'kafkajs';
 
 export const kafkaConfig = () => {
   const kafkaHost = process.env.KAFKA_HOST;
