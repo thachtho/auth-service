@@ -1,12 +1,12 @@
 import { getCurrentSecondTime } from '@common/time';
 import { Injectable } from '@nestjs/common';
 import { of } from 'rxjs';
-import { KafkaHealth } from '../kafka.controler.i';
+import { KafkaHealthCheck } from '../kafka.controler.i';
 import { TIME_CHECK_HEALTH } from './health-check.i';
 
 @Injectable()
 export class HealthCheck {
-  healthStatus = KafkaHealth.WAITING;
+  healthStatus = KafkaHealthCheck.WAITING;
   timeLive = getCurrentSecondTime();
 
   onModuleInit() {
@@ -26,11 +26,11 @@ export class HealthCheck {
     const distance = currentTime - this.timeLive;
 
     if (distance < TIME_CHECK_HEALTH) {
-      this.healthStatus = KafkaHealth.HEALTHY;
+      this.healthStatus = KafkaHealthCheck.HEALTHY;
 
       return;
     }
 
-    this.healthStatus = KafkaHealth.UN_HEALTHY;
+    this.healthStatus = KafkaHealthCheck.UN_HEALTHY;
   }
 }

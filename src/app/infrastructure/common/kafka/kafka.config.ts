@@ -1,4 +1,5 @@
 import { Transport } from '@nestjs/microservices';
+import { KafkaConfig } from './kafka.i';
 
 export const kafkaConfig = () => {
   const kafkaHost = process.env.KAFKA_HOST;
@@ -8,11 +9,11 @@ export const kafkaConfig = () => {
     transport: Transport.KAFKA,
     options: {
       client: {
-        clientId: 'auth',
+        clientId: KafkaConfig.CLIENT_ID,
         brokers: [`${kafkaHost}:${kafkaPort}`],
       },
       consumer: {
-        groupId: 'auth-consumer',
+        groupId: KafkaConfig.GROUP_ID,
       },
     },
   };
