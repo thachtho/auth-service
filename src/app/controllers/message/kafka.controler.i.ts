@@ -5,7 +5,7 @@ export interface IKafkaParams {
   data: any;
 }
 
-export enum KafkaEvent {
+export enum KafkaTopics {
   AUTH_LOGIN = 'auth-login',
   HEALTH_CHECK = 'health_check',
 }
