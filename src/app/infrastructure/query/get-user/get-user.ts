@@ -11,7 +11,9 @@ export class GetUser {
     this.userHost = CON_FIG.request.userService;
   }
 
-  getUserByEmail(email: string) {
-    return this.httpService.get<IUser>(`${this.userHost}/user/${email}`);
+  getUserByNickname(nickname: string) {
+    return this.httpService.get<IUser>(
+      `${this.userHost}/users/find-by-nickname/${nickname}`,
+    );
   }
 }

@@ -25,11 +25,11 @@ export class LoginUseCase {
   ) {}
 
   excute(data: ILogin): Observable<any> {
-    const { email, password } = data;
+    const { nickname, password } = data;
 
     return of(null).pipe(
       switchMap(() => {
-        return this.getUser.getUserByEmail(email).pipe(
+        return this.getUser.getUserByNickname(nickname).pipe(
           switchMap((res) => {
             const user = res.data;
 

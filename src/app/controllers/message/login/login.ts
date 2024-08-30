@@ -31,16 +31,10 @@ export class Login {
     const schema = {
       type: 'object',
       properties: {
-        email: {
-          type: 'string',
-          pattern: '^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$',
-          errorMessage: {
-            pattern: 'Email không đúng định dạng!.',
-          },
-        },
         password: { type: 'string' },
+        nickname: { type: 'string' },
       },
-      required: ['email', 'password'],
+      required: ['nickname', 'password'],
       additionalProperties: false,
     };
 
