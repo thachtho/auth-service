@@ -1,4 +1,4 @@
-import { kafkaConfig } from 'src/app/infrastructure/common/kafka/kafka.config';
+import { kafkaConfig } from 'src/app/config/kafka/kafka.config';
 import { NestFactory } from '@nestjs/core';
 
 export class App {

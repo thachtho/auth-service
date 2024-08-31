@@ -1,14 +1,17 @@
 import { IUser } from '@application/login/login.usecase.i';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { CON_FIG } from 'src/asset/conf/config';
+import { ConfigService } from 'src/app/config/config.service';
 
 @Injectable()
 export class GetUser {
   private userHost: null | string;
 
-  constructor(private readonly httpService: HttpService) {
-    this.userHost = CON_FIG.request.userService;
+  constructor(
+    private readonly httpService: HttpService,
+    private readonly configService: ConfigService,
+  ) {
+    this.userHost = this.configService.userHost;
   }
 
   getUserByNickname(nickname: string) {
