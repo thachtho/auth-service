@@ -1,16 +1,11 @@
-import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Pool } from 'pg';
-import { CONNECTION_POOL } from './database.module-definition';
 import { from } from 'rxjs';
-import { createTableQuery } from 'src/asset/sql/create-table';
+import { CONNECTION_POOL } from './database.module-definition';
 
 @Injectable()
-class DatabaseService implements OnModuleInit {
+class DatabaseService {
   constructor(@Inject(CONNECTION_POOL) private readonly pool: Pool) {}
-
-  onModuleInit() {
-    return this.runQuery(createTableQuery);
-  }
 
   runQuery(query: string, params?: unknown[]) {
     return from(this.pool.query(query, params));
